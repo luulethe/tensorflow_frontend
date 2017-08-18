@@ -1,0 +1,132 @@
+<!--<head>-->
+<!--<script src="node_modules/capture-video-frame/capture-video-frame.js"></script>-->
+<!--</head>-->
+
+<div class="row" style="padding: 20px">
+  <div class="col-xs-6">
+    <div class="demo-frame">
+      <div class="demo-container" style="height: 244px;width: 324px;margin: auto; border: 2px solid grey">
+        <video id="video" width="320" height="240" preload autoplay loop muted></video>
+        <canvas id="canvas" width="320" height="240"></canvas>
+      </div>
+      <div style="display: none">
+        <img id="my-screenshot"/>
+      </div>
+    </div>
+    <div ng-show="data.user.image_url" class="text-center">
+      <div class="col-xs-12 text-center">
+        <hr/>
+        <img width="220" src="{{data.user.image_url}}" style="border: 1px solid grey"/>
+      </div>
+      <div class="col-xs-12 text-center" style="margin-top: 10px;font-size: 17px;font-weight: bold;"></div>
+      <span>{{data.user.name}}</span>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <div class="loader" ng-show="isSendingRequest == true">
+      <div class="loader-inner">
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+        <div class="loader-line-wrap">
+          <div class="loader-line"></div>
+        </div>
+      </div>
+    </div>
+    <div ng-hide="isSendingRequest || data.user == null || data.user.joined ==true || data.user.food_name == null">
+      <div class="col-xs-12 no-padding text-center">
+        <h3>{{data.user.food_number + data.user.food_name}}</h3>
+      </div>
+      <div class="col-xs-12 text-center">
+        <img src="{{data.user.food_image}}" width="220"/>
+      </div>
+      <div class="col-xs-12">
+        <div class="col-xs-6 col-xs-offset-3 no-padding">
+          <button class="btn btn-primary" style="width: 100%" ng-disabled="countDownSeconds == 0" ng-readonly="countDownSeconds == 0"
+                  ng-click="confirmOrder()">Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div ng-show="!isSendingRequest && data.user.joined">
+      <div class="col-xs-12">
+        You confirmed the order successfully!
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /*gr
+   $(document).ready(function () {
+   var video = document.getElementById('video');
+   var canvas = document.getElementById('canvas');
+   var context = canvas.getContext('2d');
+
+   //add new code
+   console.log("This is running...");
+   //    angular.element('#mainElement').scope().doSomething();
+   var myTracker = new tracking.ObjectTracker('face');
+   var trackerTask = tracking.track('#video', myTracker, {camera: true});
+   myTracker.setInitialScale(4);
+   myTracker.setStepSize(2);
+   myTracker.setEdgesDensity(0.1);
+   myTracker.on('track',  function (event) {
+   if (event.data.length === 0) {
+   console.log("No Event ");
+   } else {
+   console.log("Face caught ", event);
+   trackerTask.stop();
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   event.data.forEach(function (rect) {
+   // Plots the detected targets here.
+   context.strokeStyle = '#a64ceb';
+   context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+   context.font = '11px Helvetica';
+   context.fillStyle = "#fff";
+   context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+   context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+   });
+   }
+
+   });
+   trackerTask.stop();
+   */
+
+
+  /*
+   var tracker = new tracking.ObjectTracker('face');
+   var trackerTask = tracking.track(video, tracker);
+   tracker.setInitialScale(4);
+   tracker.setStepSize(2);
+   tracker.setEdgesDensity(0.1);
+   tracking.track('#video', tracker, {camera: true});
+   tracker.on('track', function (event) {
+   angular.element('#mainElement').scope().doSomething();
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   //stop the tracking
+   trackerTask.stop();
+   event.data.forEach(function (rect) {
+   context.strokeStyle = '#a64ceb';
+   context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+   context.font = '11px Helvetica';
+   context.fillStyle = "#fff";
+   context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+   context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+   });
+   });*/
+  //  });
+
+</script>
